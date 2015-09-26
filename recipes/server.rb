@@ -65,23 +65,24 @@ template 'zabbix.conf.php' do
 	group 'root'
 end
 
-seenabled = `getenforce`
-if '#{seenabled}' == 'Enabled' then
-   execute 'selinux_policy' do
-	   command 'setsebool -P httpd_can_network_connect on'
-	   command 'setsebool -P zabbix_can_network on'
-   end
+execute 'disable_selinux' do
+	command '/usr/sbin/setenforce 0'
 end
 
-directory '/etc/iptables.d' do
-  owner 'root'
-  group 'root'
-  mode '0755'
-  action :create
+template 'selinux_config' do
+	path '/etc/selinux/config'
+	source 'zabbix_selinux.erb'
+	mode 0644
+	owner 'root'
+	group 'root'
 end
 
 iptables_rule 'zabbix_firewall' do
 	action :enable
+end
+
+service 'iptables' do
+	action [:enable, :restart]
 end
 
 service 'zabbix-server' do
