@@ -3,9 +3,18 @@ zabbix CHANGELOG
 
 This file is used to list changes made in each version of the zabbix cookbook.
 
+1.1.0
+-----
+
+- Som3guy - Installs zabbix 3.0.0
+
+1.0.0
+-----
+- Som3guy - Working installs of zabbix 2.4.x
+
 0.1.0
 -----
-- [your_name] - Initial release of zabbix
+- Som3guy - Initial release of zabbix
 
 - - -
 Check the [Markdown Syntax Guide](http://daringfireball.net/projects/markdown/syntax) for help with Markdown.
