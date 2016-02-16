@@ -96,18 +96,41 @@ Attributes
 Usage
 -----
 #### zabbix::default
-TODO: Write usage instructions for each cookbook.
 
-e.g.
-Just include `zabbix` in your node's `run_list`:
+Create a role or environment files containing similar info:
 
-```json
-{
-  "name":"my_node",
-  "run_list": [
-    "recipe[zabbix]"
-  ]
-}
+```ruby
+name 'zabbix_server'
+
+description 'This role is meant to be applied to the zabbix server'
+
+run_list 'recipe[zabbix]'
+
+override_attributes(
+  zabbix: {
+    php: {
+      servername: 'zabbix.domain.tld'
+    },
+  agent: {
+      version: '2.4.6',
+      servers: 'zabbix.domain.tld',
+      servers_active: 'zabbix.domain.tld',
+      Hostname: 'zabbix.domain.tld',
+      enabled: 'true'
+    },
+    mysql: {
+      root_password: 'XXXXXXXXXX',
+      password: 'XXXXXXXXXX'
+    },
+    server: {
+      version: '3.0.0',
+      enabled: 'true',
+      conf: {
+        DBPassword: 'XXXXXXXXX'
+      }
+    }
+  }
+)
 ```
 
 Contributing
