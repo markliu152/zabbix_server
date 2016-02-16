@@ -1,23 +1,14 @@
 zabbix Cookbook
 ===============
-TODO: Enter the cookbook description here.
-
-e.g.
-This cookbook makes your favorite breakfast sandwich.
+This cookbook is to install zabbix-server 3.0 LTS and zabbix-agent LTS on RHEL 7. Using MariaDB (Mysql) database.
 
 Requirements
 ------------
-TODO: List your cookbook requirements. Be sure to include any requirements this cookbook has on platforms, libraries, other cookbooks, packages, operating systems, etc.
-
-e.g.
-#### packages
-- `toaster` - zabbix needs toaster to brown your bagel.
+#### Platform
+OS Platform: RHEL/CentOS 7
 
 Attributes
 ----------
-TODO: List your cookbook attributes here.
-
-e.g.
 #### zabbix::default
 <table>
   <tr>
