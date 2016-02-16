@@ -1,5 +1,6 @@
 # General Zabbix information
 default['zabbix']['server']['version'] = '2.4.6'
+default['zabbix']['server']['release'] = '1.el6'
 default['zabbix']['server']['enabled'] = 'false'
 default['zabbix']['server']['repo'] = '/etc/yum.repos.d/zabbix.repo'
 
@@ -36,20 +37,9 @@ default['zabbix']['server']['conf']['SNMPTrapperFile'] = '/var/log/snmptt/snmptt
 
 
 
-default['zabbix']['server']['listen_port'] = '10050'
+default['zabbix']['server']['listen_port'] = '10051'
 
 #PHP settings
 default['zabbix']['php']['timezone'] = 'Europe/Riga'
 default['zabbix']['php']['zabbix_listen'] = 'localhost'
 default['zabbix']['php']['server_name'] = ''
-
-
-
-
-# Mysql User info
-
-default['zabbix']['mysql']['user'] = 'zabbix'
-# Need to be moved to an encrypted databag
-default['zabbix']['mysql']['password'] = ''
-default['zabbix']['mysql']['zabbix_prep_dir'] = '/usr/share/doc/zabbix-server-mysql-'
-

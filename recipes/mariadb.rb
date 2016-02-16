@@ -8,6 +8,7 @@ template 'maria_repo' do
 end
 
 package 'MariaDB-server' do
+	version node['zabbix']['mysql']['version']
     action :install
 end
 

@@ -1,12 +1,13 @@
 # Install the zabbix 2.4 repo
 
    execute 'zabbix_repo_install' do
-      command 'rpm -ivh http://repo.zabbix.com/zabbix/2.4/rhel/6/x86_64/zabbix-release-2.4-1.el6.noarch.rpm'
+      command 'rpm -ivh http://repo.zabbix.com/zabbix/3.0/rhel/7/x86_64/zabbix-release-3.0-1.el7.noarch.rpm'
       not_if { File.exist?("#{node['zabbix']['server']['repo']}")}
    end
 
 package ['zabbix-server-mysql', 'zabbix-web-mysql']  do
-  action :install
+	version "#{node['zabbix']['server']['version']}-#{node['zabbix']['server']['release']}"
+    action :install
 end
 
 
@@ -63,10 +64,6 @@ template 'zabbix.conf.php' do
 	mode 0644
 	owner 'root'
 	group 'root'
-end
-
-execute 'disable_selinux' do
-	command '/usr/sbin/setenforce 0'
 end
 
 template 'selinux_config' do
