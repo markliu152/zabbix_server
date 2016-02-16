@@ -18,6 +18,12 @@ Attributes
     <th>Default</th>
   </tr>
   <tr>
+    <td><tt>['zabbix']['server']['enabled']</tt></td>
+    <td>Boolean</td>
+    <td>Will install zabbix server if true</td>
+    <td><tt>false</tt></td>
+  </tr>
+  <tr>
     <td><tt>['zabbix']['server']['conf']['DBPassword']</tt></td>
     <td>Text</td>
     <td>DB password located in the zabbix-server.conf file</td>
@@ -44,6 +50,34 @@ Attributes
     <td>Text</td>
     <td>Root DB password</td>
     <td><tt>empty</tt></td>
+  </tr>
+</table>
+
+#### zabbix::agent
+<table>
+  <tr>
+    <th>Key</th>
+    <th>Type</th>
+    <th>Description</th>
+    <th>Default</th>
+  </tr>
+  <tr>
+    <td><tt>['zabbix']['agent']['enabled']</tt></td>
+    <td>Boolean</td>
+    <td>Will install zabbix agent if true</td>
+    <td><tt>false</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['zabbix']['agent']['Server']</tt></td>
+    <td>Text</td>
+    <td>Sets the Server setting in zabbix-agentd.conf</td>
+    <td><tt>127.0.0.1</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['zabbix']['agent']['ServerActive']</tt></td>
+    <td>Text</td>
+    <td>Sets the ServerActive setting in zabbix-agentd.conf</td>
+    <td><tt>127.0.0.1</tt></td>
   </tr>
 </table>
 
