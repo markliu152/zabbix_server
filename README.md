@@ -9,7 +9,7 @@ OS Platform: RHEL/CentOS 7
 
 Attributes
 ----------
-#### zabbix::default
+#### zabbix::server
 <table>
   <tr>
     <th>Key</th>
@@ -22,6 +22,12 @@ Attributes
     <td>Text</td>
     <td>DB password located in the zabbix-server.conf file</td>
     <td><tt>empty</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['zabbix']['php']['timezone']</tt></td>
+    <td>Text</td>
+    <td>Set your local timezone here</td>
+    <td><tt>Europe/Riga</tt></td>
   </tr>
 </table>
 
