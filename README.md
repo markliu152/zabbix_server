@@ -62,6 +62,12 @@ Attributes
     <th>Default</th>
   </tr>
   <tr>
+    <td><tt>['zabbix']['agent']['Hostname']</tt></td>
+    <td>Text</td>
+    <td>Sets the Hostname setting in zabbix-agent.conf</td>
+    <td><tt>empty</tt></td>
+  </tr>
+  <tr>
     <td><tt>['zabbix']['agent']['enabled']</tt></td>
     <td>Boolean</td>
     <td>Will install zabbix agent if true</td>
