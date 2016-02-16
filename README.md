@@ -24,6 +24,12 @@ Attributes
     <td><tt>false</tt></td>
   </tr>
   <tr>
+    <td><tt>['zabbix']['php']['server_name']</tt></td>
+    <td>Text</td>
+    <td>Zabbix server hostname for php</td>
+    <td><tt>empty</tt></td>
+  </tr>
+  <tr>
     <td><tt>['zabbix']['server']['conf']['DBPassword']</tt></td>
     <td>Text</td>
     <td>DB password located in the zabbix-server.conf file</td>
