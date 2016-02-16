@@ -31,6 +31,22 @@ Attributes
   </tr>
 </table>
 
+#### zabbix::mariadb
+<table>
+  <tr>
+    <th>Key</th>
+    <th>Type</th>
+    <th>Description</th>
+    <th>Default</th>
+  </tr>
+  <tr>
+    <td><tt>['zabbix']['mysql']['root_password']</tt></td>
+    <td>Text</td>
+    <td>Root DB password</td>
+    <td><tt>empty</tt></td>
+  </tr>
+</table>
+
 Usage
 -----
 #### zabbix::default
