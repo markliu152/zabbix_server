@@ -18,10 +18,10 @@ Attributes
     <th>Default</th>
   </tr>
   <tr>
-    <td><tt>['zabbix']['bacon']</tt></td>
-    <td>Boolean</td>
-    <td>whether to include bacon</td>
-    <td><tt>true</tt></td>
+    <td><tt>['zabbix']['server']['conf']['DBPassword']</tt></td>
+    <td>Text</td>
+    <td>DB password located in the zabbix-server.conf file</td>
+    <td><tt>empty</tt></td>
   </tr>
 </table>
 
