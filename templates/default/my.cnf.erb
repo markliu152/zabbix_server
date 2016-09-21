@@ -1,0 +1,45 @@
+[client]
+<% node['mysql']['conf']['client'].each do |name,value| -%>
+<%= name %> = <%= value %>
+<% end -%>
+
+[mysqld]
+<% node['mysql']['conf']['mysqld'].each do |name,value| -%>
+  <% if 'ignore-db-dir' == name -%>
+    <% value.each do |ignore_dir| -%>
+<%= name -%> = <%= ignore_dir %>
+    <% end -%>
+  <% else -%>
+<%= name %> = <%= value %>
+  <% end -%>
+<% end -%>
+
+<% if node['mysql']['conf']['innodb_file_per_table'] -%>
+<%= node['mysql']['conf']['innodb_file_per_table'] %>
+<% end -%>
+
+<% if node['mysql']['conf']['skip-slave-start'] -%>
+<%= node['mysql']['conf']['skip-slave-start'] %>
+<% end -%>
+
+[mysqldump]
+<% node['mysql']['conf']['mysqldump'].each do |name,value| -%>
+<%= name %> = <%= value %>
+<% end -%>
+<%= node['mysql']['conf']['quick'] %>
+
+[mysql]
+<%= node['mysql']['conf']['mysql']['no-auto-rehash'] %>
+
+[mysqlhotcopy]
+
+<%= node['mysql']['conf']['interactive-timeout'] %>
+
+[mysqld_safe]
+<% node['mysql']['conf']['mysqld_safe'].each do |name,value| -%>
+<%= name %> = <%= value %>
+<% end -%>
+
+<% if node['mysql']['includedir'] -%>
+!includedir <%= node['mysql']['includedir'] %>
+<% end -%>

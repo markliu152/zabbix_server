@@ -1,0 +1,459 @@
+[PHP]
+
+;;;;;;;;;;;;;;;;;;;
+; About php.ini   ;
+;;;;;;;;;;;;;;;;;;;
+; PHP's initialization file, generally called php.ini, is responsible for
+; configuring many of the aspects of PHP's behavior.
+
+; PHP attempts to find and load this configuration from a number of locations.
+; The following is a summary of its search order:
+; 1. SAPI module specific location.
+; 2. The PHPRC environment variable. (As of PHP 5.2.0)
+; 3. A number of predefined registry keys on Windows (As of PHP 5.2.0)
+; 4. Current working directory (except CLI)
+; 5. The web server's directory (for SAPI modules), or directory of PHP
+; (otherwise in Windows)
+; 6. The directory from the --with-config-file-path compile time option, or the
+; Windows directory (C:\windows or C:\winnt)
+; See the PHP docs for more specific information.
+; http://php.net/configuration.file
+
+; The syntax of the file is extremely simple.  Whitespace and lines
+; beginning with a semicolon are silently ignored (as you probably guessed).
+; Section headers (e.g. [Foo]) are also silently ignored, even though
+; they might mean something in the future.
+
+; Directives following the section heading [PATH=/www/mysite] only
+; apply to PHP files in the /www/mysite directory.  Directives
+; following the section heading [HOST=www.example.com] only apply to
+; PHP files served from www.example.com.  Directives set in these
+; special sections cannot be overridden by user-defined INI files or
+; at runtime. Currently, [PATH=] and [HOST=] sections only work under
+; CGI/FastCGI.
+; http://php.net/ini.sections
+
+; Directives are specified using the following syntax:
+; directive = value
+; Directive names are *case sensitive* - foo=bar is different from FOO=bar.
+; Directives are variables used to configure PHP or PHP extensions.
+; There is no name validation.  If PHP can't find an expected
+; directive because it is not set or is mistyped, a default value will be used.
+
+; The value can be a string, a number, a PHP constant (e.g. E_ALL or M_PI), one
+; of the INI constants (On, Off, True, False, Yes, No and None) or an expression
+; (e.g. E_ALL & ~E_NOTICE), a quoted string ("bar"), or a reference to a
+; previously set variable or directive (e.g. ${foo})
+
+; Expressions in the INI file are limited to bitwise operators and parentheses:
+; |  bitwise OR
+; ^  bitwise XOR
+; &  bitwise AND
+; ~  bitwise NOT
+; !  boolean NOT
+
+; Boolean flags can be turned on using the values 1, On, True or Yes.
+; They can be turned off using the values 0, Off, False or No.
+
+; An empty string can be denoted by simply not writing anything after the equal
+; sign, or by using the None keyword:
+
+;  foo =         ; sets foo to an empty string
+;  foo = None    ; sets foo to an empty string
+;  foo = "None"  ; sets foo to the string 'None'
+
+; If you use constants in your value, and these constants belong to a
+; dynamically loaded extension (either a PHP extension or a Zend extension),
+; you may only use these constants *after* the line that loads the extension.
+
+;;;;;;;;;;;;;;;;;;;;
+; php.ini Options  ;
+;;;;;;;;;;;;;;;;;;;;
+
+<% if node['php']['php.ini']['opts'] -%>
+<% node['php']['php.ini']['opts'].each do |name,value| -%>
+<%= name %> = <%= value %>
+<% end -%>
+<% end -%>
+
+;;;;;;;;;;;;;;;;;;;;
+; Language Options ;
+;;;;;;;;;;;;;;;;;;;;
+
+<% if node['php']['php.ini']['lang_opts'] -%>
+<% node['php']['php.ini']['lang_opts'].each do |name,value| -%>
+<%= name %> = <%= value %>
+<% end -%>
+<% end -%>
+
+;;;;;;;;;;;;;;;;;
+; Miscellaneous ;
+;;;;;;;;;;;;;;;;;
+
+<% if node['php']['php.ini']['misc'] -%>
+<% node['php']['php.ini']['misc'].each do |name,value| -%>
+<%= name %> = <%= value %>
+<% end -%>
+<% end -%>
+
+;;;;;;;;;;;;;;;;;;;
+; Resource Limits ;
+;;;;;;;;;;;;;;;;;;;
+
+<% if node['php']['php.ini']['res_lim'] -%>
+<% node['php']['php.ini']['res_lim'].each do |name,value| -%>
+<%= name %> = <%= value %>
+<% end -%>
+<% end -%>
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Error handling and logging ;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+<% if node['php']['php.ini']['error_hand'] -%>
+<% node['php']['php.ini']['error_hand'].each do |name,value| -%>
+<%= name %> = <%= value %>
+<% end -%>
+<% end -%>
+<% if node['php']['php.ini']['error_hand_win'] -%>
+<% node['php']['php.ini']['error_hand_win'].each do |name,value| -%>
+<%= value %>
+<% end -%>
+<% end -%>
+
+;;;;;;;;;;;;;;;;;
+; Data Handling ;
+;;;;;;;;;;;;;;;;;
+
+<% if node['php']['php.ini']['data_hand'] -%>
+<% node['php']['php.ini']['data_hand'].each do |name,value| -%>
+<%= name %> = <%= value %>
+<% end -%>
+<% end -%>
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;
+; Paths and Directories ;
+;;;;;;;;;;;;;;;;;;;;;;;;;
+
+<% if node['php']['php.ini']['path_dir'] -%>
+<% node['php']['php.ini']['path_dir'].each do |name,value| -%>
+<%= name %> = <%= value %>
+<% end -%>
+<% end -%>
+
+;;;;;;;;;;;;;;;;
+; File Uploads ;
+;;;;;;;;;;;;;;;;
+
+<% if node['php']['php.ini']['file_uploads'] -%>
+<% node['php']['php.ini']['file_uploads'].each do |name,value| -%>
+<%= name %> = <%= value %>
+<% end -%>
+<% end -%>
+
+;;;;;;;;;;;;;;;;;;
+; Fopen wrappers ;
+;;;;;;;;;;;;;;;;;;
+
+<% if node['php']['php.ini']['fopen_wrappers'] -%>
+<% node['php']['php.ini']['fopen_wrappers'].each do |name,value| -%>
+<%= name %> = <%= value %>
+<% end -%>
+<% end -%>
+
+;;;;;;;;;;;;;;;;;;;;;;
+; Dynamic Extensions ;
+;;;;;;;;;;;;;;;;;;;;;;
+
+<% if node['php']['php.ini']['dynamic_extensions'] -%>
+<% node['php']['php.ini']['dynamic_extensions'].each do |name, value| -%>
+<%= name %>
+<% end -%>
+<% end -%>
+
+;;;;;;;;;;;;;;;;;;;
+; Module Settings ;
+;;;;;;;;;;;;;;;;;;;
+<% if node['php']['php.ini']['mod_settings']['cli_server'] -%>
+
+[CLI Server]
+<% node['php']['php.ini']['mod_settings']['cli_server'].each do |name,value| -%>
+<%= name %> = <%= value %>
+<% end -%>
+<% end -%>
+<% if node['php']['php.ini']['mod_settings']['date'] -%>
+
+[Date]
+<% node['php']['php.ini']['mod_settings']['date'].each do |name,value| -%>
+<%= name %> = <%= value %>
+<% end -%>
+<% end -%>
+<% if node['php']['php.ini']['mod_settings']['filter'] -%>
+
+[filter]
+<% node['php']['php.ini']['mod_settings']['filter'].each do |name,value| -%>
+<%= name %> = <%= value %>
+<% end -%>
+<% end -%>
+<% if node['php']['php.ini']['mod_settings']['iconv'] -%>
+
+[iconv]
+<% node['php']['php.ini']['mod_settings']['iconv'].each do |name,value| -%>
+<%= name %> = <%= value %>
+<% end -%>
+<% end -%>
+<% if node['php']['php.ini']['mod_settings']['intl'] -%>
+
+[intl]
+<% node['php']['php.ini']['mod_settings']['intl'].each do |name,value| -%>
+<%= name %> = <%= value %>
+<% end -%>
+<% end -%>
+<% if node['php']['php.ini']['mod_settings']['sqlite'] -%>
+
+[sqlite]
+<% node['php']['php.ini']['mod_settings']['sqlite'].each do |name,value| -%>
+<%= name %> = <%= value %>
+<% end -%>
+<% end -%>
+<% if node['php']['php.ini']['mod_settings']['sqlite3'] -%>
+
+[sqlite3]
+<% node['php']['php.ini']['mod_settings']['sqlite3'].each do |name,value| -%>
+<%= name %> = <%= value %>
+<% end -%>
+<% end -%>
+<% if node['php']['php.ini']['mod_settings']['pcre'] -%>
+
+[Pcre]
+<% node['php']['php.ini']['mod_settings']['pcre'].each do |name,value| -%>
+<%= name %> = <%= value %>
+<% end -%>
+<% end -%>
+<% if node['php']['php.ini']['mod_settings']['pdo'] -%>
+
+[Pdo]
+<% node['php']['php.ini']['mod_settings']['pdo'].each do |name,value| -%>
+<%= name %> = <%= value %>
+<% end -%>
+<% end -%>
+<% if node['php']['php.ini']['mod_settings']['pdo_mysql'] -%>
+
+[Pdo_mysql]
+<% node['php']['php.ini']['mod_settings']['pdo_mysql'].each do |name,value| -%>
+<%= name %> = <%= value %>
+<% end -%>
+<% end -%>
+<% if node['php']['php.ini']['mod_settings']['phar'] -%>
+
+[Phar]
+<% node['php']['php.ini']['mod_settings']['phar'].each do |name,value| -%>
+<%= name %> = <%= value %>
+<% end -%>
+<% end -%>
+<% if node['php']['php.ini']['mod_settings']['mail'] -%>
+
+[mail function]
+<% node['php']['php.ini']['mod_settings']['mail'].each do |name,value| -%>
+<%= name %> = <%= value %>
+<% end -%>
+<% end -%>
+<% if node['php']['php.ini']['mod_settings']['sql'] -%>
+
+[SQL]
+<% node['php']['php.ini']['mod_settings']['sql'].each do |name,value| -%>
+<%= name %> = <%= value %>
+<% end -%>
+<% end -%>
+<% if node['php']['php.ini']['mod_settings']['odbc'] -%>
+
+[ODBC]
+<% node['php']['php.ini']['mod_settings']['odbc'].each do |name,value| -%>
+<%= name %> = <%= value %>
+<% end -%>
+<% end -%>
+<% if node['php']['php.ini']['mod_settings']['interbase'] -%>
+
+[Interbase]
+<% node['php']['php.ini']['mod_settings']['interbase'].each do |name,value| -%>
+<%= name %> = <%= value %>
+<% end -%>
+<% end -%>
+<% if node['php']['php.ini']['mod_settings']['mysql'] -%>
+
+[MySQL]
+<% node['php']['php.ini']['mod_settings']['mysql'].each do |name,value| -%>
+<%= name %> = <%= value %>
+<% end -%>
+<% end -%>
+<% if node['php']['php.ini']['mod_settings']['mysqli'] -%>
+
+[MySQLi]
+<% node['php']['php.ini']['mod_settings']['mysqli'].each do |name,value| -%>
+<%= name %> = <%= value %>
+<% end -%>
+<% end -%>
+<% if node['php']['php.ini']['mod_settings']['mysqlnd'] -%>
+
+[mysqlnd]
+<% node['php']['php.ini']['mod_settings']['mysqlnd'].each do |name,value| -%>
+<%= name %> = <%= value %>
+<% end -%>
+<% end -%>
+<% if node['php']['php.ini']['mod_settings']['oci8'] -%>
+
+[OCI8]
+<% node['php']['php.ini']['mod_settings']['oci8'].each do |name,value| -%>
+<%= name %> = <%= value %>
+<% end -%>
+<% end -%>
+<% if node['php']['php.ini']['mod_settings']['pgsql'] -%>
+
+[PostgreSQL]
+<% node['php']['php.ini']['mod_settings']['pgsql'].each do |name,value| -%>
+<%= name %> = <%= value %>
+<% end -%>
+<% end -%>
+<% if node['php']['php.ini']['mod_settings']['sybct'] -%>
+
+[Sybase-CT]
+<% node['php']['php.ini']['mod_settings']['sybct'].each do |name,value| -%>
+<%= name %> = <%= value %>
+<% end -%>
+<% end -%>
+<% if node['php']['php.ini']['mod_settings']['bcmath'] -%>
+
+[bcmath]
+<% node['php']['php.ini']['mod_settings']['bcmath'].each do |name,value| -%>
+<%= name %> = <%= value %>
+<% end -%>
+<% end -%>
+<% if node['php']['php.ini']['mod_settings']['browscap'] -%>
+
+[browscap]
+<% node['php']['php.ini']['mod_settings']['browscap'].each do |name,value| -%>
+<%= name %> = <%= value %>
+<% end -%>
+<% end -%>
+<% if node['php']['php.ini']['mod_settings']['session'] -%>
+
+[Session]
+<% node['php']['php.ini']['mod_settings']['session'].each do |name,value| -%>
+<%= name %> = <%= value %>
+<% end -%>
+<% end -%>
+<% if node['php']['php.ini']['mod_settings']['mssql'] -%>
+
+[MSSQL]
+<% node['php']['php.ini']['mod_settings']['mssql'].each do |name,value| -%>
+<%= name %> = <%= value %>
+<% end -%>
+<% end -%>
+<% if node['php']['php.ini']['mod_settings']['assert'] -%>
+
+[Assertion]
+<% node['php']['php.ini']['mod_settings']['assert'].each do |name,value| -%>
+<%= name %> = <%= value %>
+<% end -%>
+<% end -%>
+<% if node['php']['php.ini']['mod_settings']['com'] -%>
+
+[COM]
+<% node['php']['php.ini']['mod_settings']['com'].each do |name,value| -%>
+<%= name %> = <%= value %>
+<% end -%>
+<% end -%>
+<% if node['php']['php.ini']['mod_settings']['mbstring'] -%>
+
+[mbstring]
+<% node['php']['php.ini']['mod_settings']['mbstring'].each do |name,value| -%>
+<%= name %> = <%= value %>
+<% end -%>
+<% end -%>
+<% if node['php']['php.ini']['mod_settings']['gd'] -%>
+
+[gd]
+<% node['php']['php.ini']['mod_settings']['gd'].each do |name,value| -%>
+<%= name %> = <%= value %>
+<% end -%>
+<% end -%>
+<% if node['php']['php.ini']['mod_settings']['exif'] -%>
+
+[exif]
+<% node['php']['php.ini']['mod_settings']['exif'].each do |name,value| -%>
+<%= name %> = <%= value %>
+<% end -%>
+<% end -%>
+<% if node['php']['php.ini']['mod_settings']['tidy'] -%>
+
+[Tidy]
+<% node['php']['php.ini']['mod_settings']['tidy'].each do |name,value| -%>
+<%= name %> = <%= value %>
+<% end -%>
+<% end -%>
+<% if node['php']['php.ini']['mod_settings']['soap'] -%>
+
+[soap]
+<% node['php']['php.ini']['mod_settings']['soap'].each do |name,value| -%>
+<%= name %> = <%= value %>
+<% end -%>
+<% end -%>
+<% if node['php']['php.ini']['mod_settings']['sysvshm'] -%>
+
+[sysvshm]
+<% node['php']['php.ini']['mod_settings']['sysvshm'].each do |name,value| -%>
+<%= name %> = <%= value %>
+<% end -%>
+<% end -%>
+<% if node['php']['php.ini']['mod_settings']['ldap'] -%>
+
+[ldap]
+<% node['php']['php.ini']['mod_settings']['ldap'].each do |name,value| -%>
+<%= name %> = <%= value %>
+<% end -%>
+<% end -%>
+<% if node['php']['php.ini']['mod_settings']['mcrypt'] -%>
+
+[mcrypt]
+<% node['php']['php.ini']['mod_settings']['mcrypt'].each do |name,value| -%>
+<%= name %> = <%= value %>
+<% end -%>
+<% end -%>
+<% if node['php']['php.ini']['mod_settings']['dba'] -%>
+
+[dba]
+<% node['php']['php.ini']['mod_settings']['dba'].each do |name,value| -%>
+<%= name %> = <%= value %>
+<% end -%>
+<% end -%>
+<% if node['php']['php.ini']['mod_settings']['xcache-common'] -%>
+
+;; this is an example, it won't work unless properly configured into php.ini
+;; http://xcache.lighttpd.net/wiki/XcacheIni
+[xcache-common]
+<% node['php']['php.ini']['mod_settings']['xcache-common'].each do |name,value| -%>
+<%= name %>
+<% end -%>
+<% end -%>
+<% if node['php']['php.ini']['mod_settings']['xcache.admin'] -%>
+
+[xcache.admin]
+<% node['php']['php.ini']['mod_settings']['xcache.admin'].each do |name,value| -%>
+<%= name %> = <%= value %>
+<% end -%>
+<% end -%>
+<% if node['php']['php.ini']['mod_settings']['xcache'] -%>
+
+[xcache]
+<% node['php']['php.ini']['mod_settings']['xcache'].each do |name,value| -%>
+<%= name %> = <%= value %>
+<% end -%>
+<% end -%>
+<% if node['php']['php.ini']['mod_settings']['xcache.coverager'] -%>
+
+[xcache.coverager]
+<% node['php']['php.ini']['mod_settings']['xcache.coverager'].each do |name,value| -%>
+<%= name %> = <%= value %>
+<% end -%>
+<% end -%>

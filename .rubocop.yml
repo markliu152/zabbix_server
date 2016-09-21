@@ -1,0 +1,3 @@
+# Increase the length that lines can be.
+Metrics/LineLength:
+  Max: 300

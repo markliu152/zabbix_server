@@ -1,0 +1,4 @@
+[client]
+user=root
+<% mysql_secret = Chef::EncryptedDataBagItem.load_secret(node['zabbix']['data_bag_secret_path']) %>
+password=<%= Chef::EncryptedDataBagItem.load(node['zabbix']['data_bag_name'],node['zabbix']['data_bag_item'], mysql_secret)['mysql_root_password'] %>

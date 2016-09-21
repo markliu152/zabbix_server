@@ -1,0 +1,57 @@
+<VirtualHost *:80>
+  ServerName <%= @params[:server_name] %>
+  ServerAlias <%= @params[:server_aliases].join(' ')%>
+  DocumentRoot <%= @params[:docroot] %>
+  <% if @params[:openid_env] %>
+  RewriteEngine On
+  <% end %>
+
+  <% @params[:web_alias].each do |alias_link| %>
+  Alias <%= alias_link %> <%= @params[:zabbix_web_dir]%>
+  <% end %>
+
+  <Directory <%= @params[:zabbix_web_dir]%>>
+    Options +FollowSymLinks
+    AllowOverride None
+    Require all granted
+    <% @params[:php_settings].each do |name, value| %>
+    php_admin_value <%=name%> <%=value%>
+    <%end%>
+  </Directory>
+  
+  <%  @params[:dir_restrict_access].each do |dir| %>
+
+  <Directory <%= @params[:zabbix_web_dir] %>/<%= dir %>>
+    Require all denied
+    <files *.php>
+        Require all denied
+    </files>
+  </Directory>
+
+  <% end %>
+
+  <Location /server-status>
+    SetHandler server-status
+    Require ip 127.0.0.1
+  </Location>
+
+  <Location /zabbix-admin>
+    AuthType Basic
+    AuthUserFile <%= @params[:basic_auth_file] %>
+    AuthName "This is a protected area"
+    AuthGroupFile /dev/null
+    Require valid-user
+  </Location>
+  
+  <Location /api>
+    AuthType Basic
+    AuthName "Zabbix API Credentials"
+    AuthUserFile <%= @params[:basic_auth_file]%>
+    Require valid-user
+  </Location>
+
+  LogLevel info
+  LogFormat "<%= @params[:log_format] %>" <%= @params[:log_format_name] %>
+  CustomLog  <%= @params[:log_dir]%>/<%= @params[:access_log]%> <%=@params[:log_format_name] %>
+
+</VirtualHost>
