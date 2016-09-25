@@ -1,0 +1,5 @@
+# This file is managed by chef
+
+<% node['zabbix']['proxy']['java_gateway'].each do |name,value| -%>
+<%= name %>=<%= value %>
+<% end -%>

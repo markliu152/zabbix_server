@@ -1,0 +1,53 @@
+---
+driver:
+  name: vagrant
+
+provisioner:
+  name: chef_zero
+
+verifier:
+  name: inspec
+
+platforms:
+  - name: centos-7.2
+    driver:
+
+suites:
+  - name: server
+    driver:
+      network:
+        - ["private_network", {ip: "192.168.33.50"}]
+    data_bags_path: 'test/integration/data_bags'
+    encrypted_data_bag_secret_key_path: 'test/integration/secrets/'
+    run_list:
+      - recipe[zabbix_server::vagrant_image_cleanup]
+      - recipe[zabbix_server::default]
+    attributes:
+      zabbix:
+        data_bag_secret_path: '/tmp/kitchen/encrypted_data_bag_secret/zabbix_secret_key'
+        install_type: 'server'
+        server:
+          version: '3.2.0'
+          conf:
+            ListenIP: '192.168.33.50'
+          repo:
+            version: '3.2'
+  - name: proxy
+    driver:
+      network:
+        - ["private_network", {ip: "192.168.33.51"}]
+    data_bags_path: 'test/integration/data_bags'
+    encrypted_data_bag_secret_key_path: 'test/integration/secrets/'
+    run_list:
+      - recipe[zabbix_server::vagrant_image_cleanup]
+      - recipe[zabbix_server::default]
+    attributes:
+      zabbix:
+        data_bag_secret_path: '/tmp/kitchen/encrypted_data_bag_secret/zabbix_secret_key'
+        install_type: 'proxy'
+        proxy:
+          version: '3.0.2'
+          conf:
+            ListenIP: '192.168.33.51'
+            Server: '192.168.33.50'
+            Hostname: 'Proxy 1'
