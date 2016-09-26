@@ -61,6 +61,6 @@ default['zabbix']['php']['server_name'] = ''
 # logrotate options
 default['zabbix']['logrotate']['frequency'] = 'monthly'
 default['zabbix']['logrotate']['rotate'] = 3
-default['zabbix']['logrotate']['options'] = %w(compress, missingok, notifempty)
+default['zabbix']['logrotate']['options'] = %w(compress missingok notifempty)
 
 default['zabbix']['server']['mysql_templates'] = "/usr/share/doc/zabbix-server-mysql-#{node['zabbix']['server']['version']}"
