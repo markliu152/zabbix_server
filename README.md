@@ -142,11 +142,3 @@ The default attribute name for the zabbix databag is set by: "node['zabbix']['da
 [yum-epel]: https://github.com/opscode-cookbooks/yum-epel
 [java]: https://github.com/opscode-cookbooks/java
 [apache2]: https://github.com/svanzoest-cookbooks/apache2/
-
-## Wiki space ##
-* opsinfra zabbix [wiki space](https://wiki.ucern.com/display/OPSINFRA/Zabbix)
-
-## Contributing ##
-
-Instruction on how to contribute can be found [here](https://wiki.ucern.com/display/OPSINFRA/contributing)
-
