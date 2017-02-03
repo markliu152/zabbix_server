@@ -35,6 +35,7 @@ yum_repository 'zabbix' do
   baseurl node['yum']['zabbix']['repo_url'] if node['yum']['zabbix']['mirror_url'].nil?
   gpgkey node['yum']['zabbix']['key_url']
   mirrorlist node['yum']['zabbix']['mirror_url']
+  gpgcheck node['yum']['zabbix']['gpgcheck']
   action :create
 end
 

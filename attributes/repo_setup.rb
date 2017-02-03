@@ -5,6 +5,7 @@
 default['yum']['zabbix']['repo_url'] = "http://repo.zabbix.com/zabbix/#{node['zabbix']['repo']['version']}/rhel/7/$basearch/"
 default['yum']['zabbix']['mirror_url'] = nil
 default['yum']['zabbix']['key_url'] = 'http://repo.zabbix.com/RPM-GPG-KEY-ZABBIX'
+default['yum']['zabbix']['gpgcheck'] = false
 
 # Attributes for mariaDB repo
 default['yum']['mariaDB']['repo_url'] = 'https://yum.mariadb.org/5.5.51/centos7-amd64'

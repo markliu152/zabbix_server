@@ -27,7 +27,7 @@ suites:
         data_bag_secret_path: '/tmp/kitchen/encrypted_data_bag_secret/zabbix_secret_key'
         install_type: 'server'
         server:
-          version: '3.2.0'
+          version: '3.2.3'
           conf:
             ListenIP: '192.168.33.50'
           repo:
