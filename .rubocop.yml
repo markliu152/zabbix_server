@@ -1,3 +1,8 @@
 # Increase the length that lines can be.
 Metrics/LineLength:
   Max: 300
+Style/TrailingCommaInLiteral:
+  Exclude:
+    - 'attributes/apache.rb'
+    - 'attributes/partition_database.rb'
+    - 'recipes/server.rb'
